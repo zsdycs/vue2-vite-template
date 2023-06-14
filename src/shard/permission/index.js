@@ -7,9 +7,12 @@ import getPageTitle from '@/utils/get-page-title';
 import store from '@/store/index.js';
 import { Message } from 'element-ui';
 
-NProgress.configure({ showSpinner: false }); // NProgress Configuration
+NProgress.configure({
+  showSpinner: false,
+});
 
-const EnableAuth = true;
+const EnableAuth = false;
+const { firstPath, indexPath } = __GLOBAL_SETTINGS__;
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
@@ -26,7 +29,7 @@ router.beforeEach(async (to, from, next) => {
       const metaTitle = to.meta.title;
       if (userMenus.includes(metaTitle)) {
         next();
-      } else if (to.path === '/main') {
+      } else if (to.path === indexPath) {
         next();
       } else {
         Message({
@@ -37,11 +40,15 @@ router.beforeEach(async (to, from, next) => {
         NProgress.done();
       }
     } else {
-      next({ path: '/' });
+      next({
+        path: firstPath,
+      });
     }
   } else {
     if (ROUTING_WHITELIST.includes(to.path)) {
-      next({ path: '/main' });
+      next({
+        path: indexPath,
+      });
     } else {
       next();
     }

@@ -1,5 +1,7 @@
 // 全局变量
 const __GLOBAL_SETTINGS__ = {
+  firstPath: '/', // 入口地址
+  indexPath: '/examplePage', // 首页地址
   apiServer: 'http://localhost:50080/',
   hjApiServer: 'http://10.1.0.208:9000/',
   sockedlocate: 'http://192.168.10.122:52542/',
@@ -9,8 +11,7 @@ const __GLOBAL_SETTINGS__ = {
   // "influxApiConfig":"http://10.1.0.58:5009/",
   healthChecksUrl: 'http://localhost:50001/healthchecks-ui#/healthchecks',
   smtp4devUrl: 'http://10.1.0.197:52580/',
-  oilAddress:
-    'http://192.168.10.149/soil/public/index.php/admin/login/autologin?username=admin&password=admin',
+  oilAddress: 'http://192.168.10.149/soil/public/index.php/admin/login/autologin?username=admin&password=admin',
   video: {
     appkey: '27983153', // API 网关提供的 appkey
     secret: 'IzD2WROPc503cv570Zo7', // API 网关提供的 secret
