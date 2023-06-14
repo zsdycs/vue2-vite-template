@@ -1,35 +1,14 @@
-import {
-  getAccessToken,
-  setAccessToken,
-  removeAccessToken,
-} from '@/utils/auth';
+import { setAccessToken, removeAccessToken } from '@/utils/auth';
 import { adminPost, adminGet } from '@/services/service.js';
 import { API_URL } from '@/services/api-url.js';
 import { handleUserMenus } from '@/utils/index.js';
 
-const state = {
-  accessToken: getAccessToken(), // String
-  tokenUser: sessionStorage.getItem('tokenUser'), // String
-  userInfo: JSON.parse(localStorage.getItem('userInfo') || '{}'),
-  userMenus: JSON.parse(localStorage.getItem('userMenus') || '[]'),
-};
-
-const mutations = {
-  SET_ACCESS_TOKEN: (state, accessToken) => {
-    state.accessToken = accessToken;
+export const actions = {
+  endLoading({ commit }) {
+    setTimeout(() => {
+      commit('endLoading');
+    }, parseInt(Math.random() * 300 + 300));
   },
-  SET_TOKEN_USER: (state, tokenUser) => {
-    state.tokenUser = tokenUser;
-  },
-  SET_USER_INFO: (state, userInfo) => {
-    state.userInfo = userInfo;
-  },
-  SET_USER_MENUS: (state, userMenus) => {
-    state.userMenus = userMenus || [];
-  },
-};
-
-const actions = {
   // user login
   login({ commit }, data) {
     const { accessToken, tokenUser } = data;
@@ -74,7 +53,7 @@ const actions = {
       });
   },
   // user logout
-  logout({ commit, state, dispatch }) {
+  logout({ commit }) {
     commit('SET_TOKEN', '');
     commit('SET_TOKEN_USER', '');
     commit('SET_USER_INFO', {});
@@ -91,11 +70,4 @@ const actions = {
       resolve();
     });
   },
-};
-
-export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions,
 };
